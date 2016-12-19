@@ -7,6 +7,7 @@
     var scale = 0;
     var tid;
     var flexible = lib.flexible || (lib.flexible = {});
+    var isMobileDevice = /(iphone|ios|android|mini|mobile|mobi|Nokia|Symbian|iPod|iPad|Windows\s+Phone|MQQBrowser|wp7|wp8|UCBrowser7|UCWEB|360\s+Aphone\s+Browser|WindowsWechat)/i.test(navigator.userAgent);
     
     if (metaEl) {
         console.warn('将根据已有的meta标签来设置缩放比例');
@@ -67,7 +68,7 @@
 
     function refreshRem(){
         var width = docEl.getBoundingClientRect().width;
-        if (width / dpr > 540) {
+        if (!isMobileDevice && width / dpr > 540) { // 移动设备下去掉最大宽度
             width = 540 * dpr;
         }
         var rem = width / 10;
